@@ -14,6 +14,7 @@ begin
     gemspec.homepage = "http://github.com/futurechimp/uploadcolumn"
     gemspec.authors = ["Dave Hrycyszyn", "Jonas Nicklas", "Sebastian Kanthak"]
   end
+  Jeweler::GemcutterTasks.new
 rescue LoadError
   puts "Jeweler not available. Install it with: gem install jeweler"
 end
