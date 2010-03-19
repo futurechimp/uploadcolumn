@@ -6,7 +6,7 @@ require File.join(File.dirname(__FILE__), 'upload_column', 'manipulators', 'rmag
 require File.join(File.dirname(__FILE__), 'upload_column', 'manipulators', 'image_science.rb')
 require File.join(File.dirname(__FILE__), 'upload_column', 'configuration.rb')
 
-require File.join(File.dirname(__FILE__), 'init.rb')
+require File.join(File.expand_path(File.dirname(__FILE__)), "..", "init")
 
 ActiveRecord::Base.send(:include, UploadColumn::ActiveRecordExtension)
 
