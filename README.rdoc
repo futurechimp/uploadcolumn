@@ -3,7 +3,7 @@
 UploadColumn is a gem for the Ruby on Rails framework that enables easy
 uploading of files, especially images. Most other versions of this code are
 packaged for use as a Rails plugin, but this fork of the
-"original code":http://github.com/jnicklas/uploadcolumn is designed to be used
+original code (see  http://github.com/jnicklas/uploadcolumn) is designed to be used
 as a gem.  Other than that, it's just the same code you've been using to
 upload your files for many, many years.
 
