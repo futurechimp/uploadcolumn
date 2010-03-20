@@ -2,6 +2,8 @@ require 'tempfile'
 require 'rubygems'
 require 'spec'
 require 'ruby-debug'
+require 'action_view'
+require 'action_controller'
 
 require File.join(File.dirname(__FILE__), 'custom_matchers')
 
@@ -18,10 +20,10 @@ end
 
 def stub_tempfile(filename, mime_type=nil, fake_name=nil)
   raise "#{path} file does not exist" unless File.exist?(file_path(filename))
-  
+
   t = Tempfile.new(filename)
   FileUtils.copy_file(file_path(filename), t.path)
-  
+
   t.stub!(:original_filename).and_return(fake_name || filename)
   t.stub!(:content_type).and_return(mime_type)
   t.stub!(:local_path).and_return(t.path)
@@ -48,43 +50,44 @@ def stub_file(filename, mime_type=nil, fake_name=nil)
 end
 
 module UploadColumnSpecHelper
-  
+
   def disconnected_model(model_class)
     model_class.stub!(:columns).and_return([])
     return model_class.new
   end
-  
+
   def setup_standard_mocking
     @options = mock('options', :null_object => true)
     Entry.upload_column :avatar, @options
     @entry = disconnected_model(Entry)
     mock_file
   end
-  
+
   def setup_version_mocking
     Entry.upload_column :avatar, :versions => [ :thumb, :large ]
     @entry = disconnected_model(Entry)
     mock_file
   end
-  
+
   private
-    
+
   def mock_file
     @file = mock('file')
 
     @uploaded_file = mock('uploaded_file')
-    @uploaded_file.stub!(:actual_filename).and_return('monkey.png')    
+    @uploaded_file.stub!(:actual_filename).and_return('monkey.png')
   end
 end
 
 module UniversalSpecHelper
-  
+
   def running(&block)
     lambda(&block)
   end
-  
+
 end
 
 Spec::Runner.configure do |config|
   config.include UniversalSpecHelper
 end
+
